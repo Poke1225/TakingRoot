@@ -1,0 +1,7 @@
+{
+    "characterName": "Fireman",
+    "health": 200,
+    "speed": 4,
+    "atk": 20,
+    "jumpForce": 10   
+}

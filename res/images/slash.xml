@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="slash.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="slash0000" x="67" y="34" width="43" height="15" frameX="1" frameY="-19" frameWidth="64" frameHeight="32"/>
+	<SubTexture name="slash0001" x="0" y="83" width="65" height="15" frameX="1" frameY="-19" frameWidth="64" frameHeight="32"/>
+	<SubTexture name="slash0002" x="0" y="0" width="67" height="34" frameX="1" frameY="0" frameWidth="64" frameHeight="32"/>
+	<SubTexture name="slash0003" x="67" y="0" width="44" height="34" frameX="-22" frameY="0" frameWidth="64" frameHeight="32"/>
+	<SubTexture name="slash0004" x="0" y="34" width="64" height="32" frameX="-2" frameY="0" frameWidth="64" frameHeight="32"/>
+	<SubTexture name="slash0005" x="0" y="66" width="64" height="17" frameX="-2" frameY="0" frameWidth="64" frameHeight="32"/>
+	<SubTexture name="slash0006" x="67" y="49" width="4" height="4" frameX="0" frameY="0" frameWidth="64" frameHeight="32"/>
+</TextureAtlas>
