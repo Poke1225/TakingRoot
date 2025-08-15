@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="fireman.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="idle0000" x="76" y="62" width="38" height="59" frameX="-5" frameY="-5" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="idle0001" x="161" y="0" width="38" height="58" frameX="-5" frameY="-6" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="idle0002" x="161" y="58" width="38" height="57" frameX="-5" frameY="-7" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="idle0003" x="161" y="0" width="38" height="58" frameX="-5" frameY="-6" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="idle0004" x="76" y="62" width="38" height="59" frameX="-5" frameY="-5" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="walk0000" x="0" y="62" width="38" height="60" frameX="-5" frameY="-6" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="walk0001" x="114" y="62" width="38" height="59" frameX="-5" frameY="-5" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="walk0002" x="38" y="62" width="38" height="59" frameX="-5" frameY="-6" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="walk0003" x="114" y="62" width="38" height="59" frameX="-5" frameY="-5" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="look up0000" x="121" y="0" width="40" height="60" frameX="-3" frameY="-4" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="look up0001" x="40" y="0" width="41" height="60" frameX="-1" frameY="-4" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="jump0000" x="81" y="0" width="40" height="60" frameX="-3" frameY="-4" frameWidth="48" frameHeight="64"/>
+	<SubTexture name="falling0000" x="0" y="0" width="40" height="62" frameX="-5" frameY="-4" frameWidth="48" frameHeight="64"/>
+</TextureAtlas>

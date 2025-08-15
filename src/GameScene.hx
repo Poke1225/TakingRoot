@@ -1,5 +1,7 @@
 package ;
 
+import h2d.col.Point;
+import h2d.col.Bounds;
 import Shaders.Masking;
 import slide.Slide;
 import Shaders.Chroma;
@@ -105,11 +107,21 @@ class GameScene extends Scene {
 
 	function addConsole() {
 		var console = new Bitmap(Res.images.console.toTile());
+		console.smooth = true;
         add(console, 2);
 	}
 
 	function addGameShaders(object:Object){
+		 for(i in 0...2){
+           // var t = new Bitmap(Tile.fromColor(0x00FF0000), object);
+            //if(i > 0) t.setPosition(320+640, 120+480);
+            //else t.setPosition(319, 119);
+        }
 		object.filter = new Group([new Shader(oldTv), new Shader(chroma), new Shader(deadShader)]);
+		object.filter.useScreenResolution = true;
+		object.filter.autoBounds = false;
+		//object.getBounds(object, Bounds.fromValues(320, 120, 640, 480));
+		//object.filter.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
 	}
 
 	var fixedDt:Float = 1/60;

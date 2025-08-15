@@ -9,6 +9,7 @@ import utils.RotatedRect;
 import hxd.Res;
 import hxd.Math;
 import hxd.App;
+import sys.FileSystem;
 import haxe.Json;
 import h2d.Tile;
 import h2d.Bitmap;
@@ -253,7 +254,7 @@ class Player extends Object {
     }
 
     public function shootBullet() {
-        if(isAlive && !isAttacking && !Game.inst.battleFinished){
+        if(isAlive && !isAttacking && Game.inst.battleStarted && !Game.inst.battleFinished){
             animation.loop = false;
             animation.speed = 6;
             animation.playAnimation("shoot", direction == LEFT ? true : false);
@@ -275,7 +276,7 @@ class Player extends Object {
     }
 
     public function startSlashAnim(){
-        if(isAlive && !Game.inst.battleFinished){
+        if(isAlive && Game.inst.battleStarted && !Game.inst.battleFinished){
             slash.alpha = 1;
             slash.playAnimation("slash", direction == LEFT ? true : false);
             if(direction == RIGHT) addHitbox("Slash", getCenter().x + 50, getCenter().y - 5, 100, 40, 0, 0.16);
@@ -286,7 +287,7 @@ class Player extends Object {
     }
 
     public function movePlayer(dir:PlayerDirection, dt:Float){
-        if(!isDodging && isAlive && !Game.inst.battleFinished){
+        if(!isDodging && isAlive && Game.inst.battleStarted && !Game.inst.battleFinished){
             if(dir == RIGHT) {
                 if(vel.x < charSpeed) vel.x += charSpeed*dt*60*0.75;
                 isMoving = true;
@@ -336,7 +337,7 @@ class Player extends Object {
             //isMoving = false;
         }
         
-        if(Game.inst.battleFinished == false || Game.inst.battleStarted == true){
+        if(Game.inst.battleStarted && !Game.inst.battleFinished){
             if (isMoving && animation.animName != "shoot" && animation.animName != "walk"){
                 animation.loop = true;
                 animation.speed = 4;

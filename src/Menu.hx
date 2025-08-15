@@ -14,11 +14,6 @@ class Menu extends GameScene {
 
       //  addConsole();
         add(gameObj, 0);
-         for(i in 0...2){
-            var t = new Bitmap(Tile.fromColor(0x00FF0000), gameObj);
-            if(i > 0) t.setPosition(320+640*(i), 120+480*(i));
-            else t.setPosition(319, 119);
-        }
         addGameShaders(gameObj);
     }
 

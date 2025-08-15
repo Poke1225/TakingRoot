@@ -1,0 +1,7 @@
+{
+    "characterName": "Piranha",
+    "health": 100,
+    "speed": 2,
+    "atk": 20,
+    "jumpForce": 10   
+}

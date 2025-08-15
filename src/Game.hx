@@ -78,12 +78,6 @@ class Game extends GameScene {
         add(gameObj, 0);
 
 
-        for(i in 0...2){
-            var t = new Bitmap(Tile.fromColor(0x00FF0000), gameObj);
-            if(i > 0) t.setPosition(319+640*(i), 119+480*(i));
-            else t.setPosition(319, 119);
-        }
-
         var nightsky = new Bitmap(Res.images.nightsky.toTile(), gameObj);
         nightsky.setPosition(320, 120);
 
@@ -106,7 +100,7 @@ class Game extends GameScene {
        // gameObj.addBounds(this, Bounds.fromValues(320, 120, 640, 480), 0, 0, 640, 480);
 
         addCharacter("Piranha", width*0.35, height*0.6, 1, false, RIGHT);
-        addCharacter("Piranha", width*0.65, height*0.6, 2, true, LEFT);
+        addCharacter("Piranha", width*0.65-50, height*0.6, 2, true, LEFT);
         for(char in playerGrp){
             gameObj.addChild(char.bulBatch);
             gameObj.addChild(char.slash);
@@ -260,9 +254,15 @@ class Game extends GameScene {
         super.fixedUpdate(dt);
         superAngle += dt;
         countdown -= dt;
+        //gameObj.getBounds(gameObj, Bounds.fromValues(320, 120, 640, 480)); 
+        //gameObj.drawRec(ctx);
+       // gameObj.clipBounds(ctx, Bounds.fromValues(320, 120, 640, 480));
+       // gameObj.filter.getBounds(gameObj, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
        // trace("gameObj.x :" + gameObj.x);
-        if(countdown <= 0.0 && !battleFinished && !battleStarted){
+       if(!battleStarted){
             for(player in playerGrp) player.animation.playAnimation("up", player.direction == LEFT ? true : false);
+       }
+        if(countdown <= 0.0 && !battleStarted){
             Slide.tween(superseed).to({y: 70}, 0.6).ease(Quad.easeOut).start().onComplete(function() {
                 battleSong.pause = false;
                 battleStarted = true;
