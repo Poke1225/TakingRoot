@@ -60,6 +60,63 @@ class Masking extends h3d.shader.ScreenShader {
 
 }
 
+class Outline extends h3d.shader.ScreenShader {
+
+	static var SRC = {
+
+		@param var texture:Sampler2D;
+		@param var time:Float = 0;
+		@param var speed:Float = 1;
+
+		function fragment()
+		{
+			var uv = input.uv;
+		//	uv.x += 0.5;
+			var color = texture.get(uv);
+
+			var ofs = vec2(2/texture.size().x, 2/texture.size().y);
+			var left = texture.get(uv - vec2(ofs.x, 0)).a;
+		    var down = texture.get(uv + vec2(0, ofs.y)).a;
+			var up = texture.get(uv - vec2(0, ofs.y)).a;
+			var right = texture.get(uv + vec2(ofs.x, 0)).a;
+
+			var alpha = 0.0;
+			alpha = max(alpha, left);
+			alpha = max(alpha, down);
+			alpha = max(alpha, up);
+			alpha = max(alpha, right);
+
+			//if(time <= 1.0) time = 1;
+			var center = length(uv - 0.5);
+
+			var edge = smoothstep(0, 1, center);
+
+			var glow = (1.0 - color.a) * edge;
+			//}
+
+			var colChannel = vec3(color.r, color.g, color.b);
+			if(color.a == 0.0){
+				if(left != 0.0 || up != 0.0 || down != 0.0 || right != 0.0){
+					var gradY = smoothstep(0.7, 0.0, uv.y);
+			 	    color = vec4(1, 1*gradY, 1*gradY, 0.);
+				}
+				else {
+					color = vec4(colChannel, color.a);
+				}
+			}
+			else {
+				color = vec4(colChannel, color.a);
+			}
+
+			//color = color + vec4(vec3(glow), glow);
+		//	color.r = texture.get(uv + vec2(0.1, 0.0)).r;
+
+			pixelColor = color;
+		}
+	}
+
+}
+
 class OldTV extends h3d.shader.ScreenShader {
 
 	static var SRC = {

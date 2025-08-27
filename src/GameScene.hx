@@ -100,7 +100,7 @@ class GameScene extends Scene {
         fps.scale(2);
        // add(fps, 1);
 
-		addConsole();
+		//addConsole();
 		
 		trace("Opened new scene.");
 	}
@@ -117,10 +117,16 @@ class GameScene extends Scene {
             //if(i > 0) t.setPosition(320+640, 120+480);
             //else t.setPosition(319, 119);
         }
+	//	object.camera.clipViewport = true;
+	//	object.camera.setViewport(640/2, 480/2 -120, 640, 480);
+	   // var s = new Shader(oldTv);
+		//s.draw(ctx, Tile.fromColor(0x00FF0000, 640, 480));
+		//s.autoBounds = false;
+		//s.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
 		object.filter = new Group([new Shader(oldTv), new Shader(chroma), new Shader(deadShader)]);
 		object.filter.useScreenResolution = true;
-		object.filter.autoBounds = false;
-		//object.getBounds(object, Bounds.fromValues(320, 120, 640, 480));
+		//object.filter.autoBounds = false;
+		//object.filter.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
 		//object.filter.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
 	}
 
@@ -132,6 +138,7 @@ class GameScene extends Scene {
 	}
 
 	public function update(dt:Float) {
+		//this.viewportY = -0.2;
 		fps.text = "FPS: " + (Main.ME.engine.fps) + 
 				"\nMEMORY: " + Std.int(Main.ME.engine.mem.stats().textureMemory / 1048576) + "MBs" + 
 				"\nDrawCalls: " + Main.ME.engine.drawCalls;

@@ -1,5 +1,8 @@
 package;
 
+import h2d.Scene;
+import h3d.mat.Texture;
+import h2d.RenderContext;
 import hxd.snd.Channel;
 import slide.easing.Quad;
 import slide.easing.Bounce;
@@ -38,7 +41,7 @@ class Game extends GameScene {
 
     //CAMERAS
     var camGame:Camera;
-    public var gameObj:Object;
+    public var gameObj:Scene;
     var camZoom:Float = 1.2;
 
     // EFFECTS
@@ -74,7 +77,11 @@ class Game extends GameScene {
         
         camZoom = 1;
 
-        gameObj = new Object();
+        gameObj = new Scene();
+        //gameObj.constraintSize(640, 480);
+        //gameObj.scrollBounds = Bounds.fromValues(0,0, 640, 480);
+        //gameObj.setPosition(320, 120);
+        //gameObj.getBounds(gameObj, Bounds.fromValues(0,0, 1280, 720));
         add(gameObj, 0);
 
 
@@ -141,6 +148,8 @@ class Game extends GameScene {
         gameObj.addChild(energyFill2);
 
         addGameShaders(gameObj);
+      //  gameObj.filter.autoBounds = true;
+        //gameObj.filter.boundsExtend = 100;
         //gameObj.filter.useScreenResolution = false;
     }
 
@@ -171,6 +180,7 @@ class Game extends GameScene {
         var dy = Math.abs(obj1.y - obj2.y);
         return Math.sqrt(dx*dx + dy*dy);
     }
+
 
     var choice:Int = 0; // 0 is left, 1 is also left, 2 is right, 3 is attack
     var attackChoice:Int = 0; // 0 is slash, 1 is bullet
@@ -248,12 +258,20 @@ class Game extends GameScene {
         }
     }
 
+    override function sync(ctx:RenderContext) {
+        super.sync(ctx);
+        //gameObj.filter.autoBounds = false;
+      //  gameObj.filter.getBounds(this, Bounds.fromValues(0,0, 10, 10), new Point(1, 1));
+       // gameObj.clipBounds(ctx, Bounds.fromValues(0,0, 10, 10));
+    }
+
     var angle:Float = 0;
     var superAngle:Float = 0;
     override function fixedUpdate(dt:Float) {
         super.fixedUpdate(dt);
         superAngle += dt;
         countdown -= dt;
+     //   @:privateAccess gameObj.getBounds().cli;
         //gameObj.getBounds(gameObj, Bounds.fromValues(320, 120, 640, 480)); 
         //gameObj.drawRec(ctx);
        // gameObj.clipBounds(ctx, Bounds.fromValues(320, 120, 640, 480));
@@ -285,7 +303,7 @@ class Game extends GameScene {
 
             if(battleFinished){
                 if(player != null && player.isAlive && superseed != null){
-                    player.animation.playAnimation("up");
+                    player.animation.playAnimation("up", player.direction == LEFT ? true : false);
                     Slide.tween(superseed).to({y: player.getCenter().y+40}, 3).ease(Quad.easeOut).start().onComplete(function() {
                        superseed.visible = false;
                        player.animation.adjustColor({hue: superAngle});
