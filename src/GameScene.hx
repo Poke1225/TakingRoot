@@ -100,12 +100,17 @@ class GameScene extends Scene {
         fps.scale(2);
        // add(fps, 1);
 
-		//addConsole();
+		addConsole();
 		
 		trace("Opened new scene.");
 	}
 
 	function addConsole() {
+		var b1 = new Bitmap(Tile.fromColor(0x000000, 320, 720));
+		add(b1, 2);
+		var b2 = new Bitmap(b1.tile.clone());
+		b2.x = width-320;
+		add(b2, 2);
 		var console = new Bitmap(Res.images.console.toTile());
 		console.smooth = true;
         add(console, 2);

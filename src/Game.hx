@@ -1,5 +1,6 @@
 package;
 
+import slide.easing.Back;
 import h2d.Scene;
 import h3d.mat.Texture;
 import h2d.RenderContext;
@@ -154,10 +155,10 @@ class Game extends GameScene {
     }
 
     function addCharacter(name:String, x:Float, y:Float, player:Int, bot:Bool, dir:PlayerDirection) {
-        var char = new Player(name, player);
+        var char = new Player(name, player, bot);
         char.direction = dir;
         char.setPosition(x, y);
-        char.isCpuMode = bot;
+       // char.isCpuMode = bot;
         char.animation.blendMode = Add;
         char.slash.blendMode = Add;
         char.bulBatch.blendMode = Add;
@@ -265,6 +266,7 @@ class Game extends GameScene {
        // gameObj.clipBounds(ctx, Bounds.fromValues(0,0, 10, 10));
     }
 
+     var doMute:Bool = false;
     var angle:Float = 0;
     var superAngle:Float = 0;
     override function fixedUpdate(dt:Float) {
@@ -281,10 +283,11 @@ class Game extends GameScene {
             for(player in playerGrp) player.animation.playAnimation("up", player.direction == LEFT ? true : false);
        }
         if(countdown <= 0.0 && !battleStarted){
-            Slide.tween(superseed).to({y: 70}, 0.6).ease(Quad.easeOut).start().onComplete(function() {
+            Slide.tween(superseed).to({y: 70}, 0.6).ease(Back.easeIn).start().onComplete(function() {
                 battleSong.pause = false;
                 battleStarted = true;
             });
+            countdown = 10000;
         }
 
         if(superAngle % Math.PI/4 == 0) superseed.rotation = superAngle;
@@ -302,14 +305,26 @@ class Game extends GameScene {
             }
 
             if(battleFinished){
-                if(player != null && player.isAlive && superseed != null){
+                if(!playerGrp[0].isAlive && !doMute){
+                    battleSong.fadeTo(0.01, 2.4, function() {
+                        Slide.tween(deadShader).to({time : 2}, 1.2).start().onComplete(
+                            function() {
+                                changeScene(new Menu());
+                            }
+                        );
+                    });
+                    doMute = true;
+                }
+                if(player != null && player.isAlive && superseed != null && superseed.y == 70){
                     player.animation.playAnimation("up", player.direction == LEFT ? true : false);
-                    Slide.tween(superseed).to({y: player.getCenter().y+40}, 3).ease(Quad.easeOut).start().onComplete(function() {
+                    Slide.tween(superseed).to({y: player.getCenter().y-20}, 3).ease(Quad.easeOut).start().onComplete(function() {
                        superseed.visible = false;
-                       player.animation.adjustColor({hue: superAngle});
-                       player.animation.playAnimation("idle");
+                       player.animation.playAnimation("idle", player.direction == LEFT ? true : false);
                     });
                     superseed.x = player.getCenter().x;
+                }
+                if(player != null && !superseed.visible){
+                    player.animation.adjustColor({hue: superAngle});
                 }
             }
 

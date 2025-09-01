@@ -1,5 +1,6 @@
 package;
 
+import h2d.Scene;
 import hxd.Res;
 import h2d.Tile;
 import h2d.Bitmap;
@@ -8,13 +9,15 @@ import hxd.Key;
 
 class Menu extends GameScene {
 
-    var gameObj:Object = new Object();
+    var gameObj:Scene = new Scene();
     public function new() {
         super();
 
+        var src = Res.sounds.powerup.play();
+        src.mute = true;
       //  addConsole();
         add(gameObj, 0);
-        addGameShaders(gameObj);
+       // addGameShaders(gameObj);
     }
 
     override function fixedUpdate(dt:Float) {

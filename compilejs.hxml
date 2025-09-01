@@ -1,0 +1,10 @@
+-cp src
+
+-lib heaps
+-lib stb_ogg_sound
+-lib random
+-lib hscript
+-lib slide
+
+-main Main
+-js hello.js

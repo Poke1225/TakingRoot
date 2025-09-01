@@ -6,7 +6,9 @@ import h2d.filter.Group;
 import h2d.col.Bounds;
 import h2d.col.Point;
 import h2d.col.RoundRect;
+#if hlsdl
 import sys.io.File;
+#end
 import hxd.Res;
 import h2d.Anim;
 import h2d.Tile;
@@ -41,7 +43,7 @@ class AnimatedSprite extends Anim {
         speed = 24;
         //animation.filter = filter1;
 
-        xml = Xml.parse(File.getContent(xmlDirectory)).firstElement();
+        xml = Xml.parse(xmlDirectory).firstElement();
     }
 
     var frameData:FrameData = {};

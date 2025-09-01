@@ -1,5 +1,6 @@
 package;
 
+import h2d.Scene;
 import hxd.Res;
 import h2d.Tile;
 import h2d.Bitmap;
@@ -8,7 +9,7 @@ import hxd.Key;
 
 class Instruction extends GameScene {
 
-    var gameObj:Object = new Object();
+    var gameObj:Scene = new Scene();
     var instruct:Int = 0;
     var m1:Bitmap;
     var m2:Bitmap;
@@ -32,6 +33,11 @@ class Instruction extends GameScene {
 
     override function update(dt:Float) {
         super.update(dt);
+
+         if(Key.isPressed(Key.ESCAPE)){
+          //  battleSong.stop();
+            changeScene(new Menu());
+        }
 
         if(Key.isPressed(Key.Z) || Key.isPressed(Key.ENTER)){
             var snd = Res.sounds.powerup.play();

@@ -9,7 +9,9 @@ import utils.RotatedRect;
 import hxd.Res;
 import hxd.Math;
 import hxd.App;
+#if hlsdl
 import sys.FileSystem;
+#end
 import haxe.Json;
 import h2d.Tile;
 import h2d.Bitmap;
@@ -92,10 +94,11 @@ class Player extends Object {
     var deadShader:Masking = new Masking();
 
 
-    public function new(_name:String = "Fireman", player:Int) {
+    public function new(_name:String = "Fireman", player:Int, isCpu:Bool = false) {
         super();
         characterName = _name;
         this.player = player;
+        isCpuMode = isCpu;
         setInputs(player);
         data = Json.parse(Res.load("characters/"+characterName+"/data.json").entry.getText());
         charSpeed = data.speed;
@@ -112,7 +115,7 @@ class Player extends Object {
        //animation = new AnimatedSprite(0, 0,)
 
         animation = new AnimatedSprite(0,0, Res.load("characters/"+characterName+"/images/"+characterName.toLowerCase()+".png").toTile(),
-                                            "res/characters/"+characterName+"/images/"+characterName.toLowerCase()+".xml");
+                                            Res.load("characters/"+characterName+"/images/"+characterName.toLowerCase()+".xml").entry.getText());
         
         addChild(animation);
         hitbox = new RotatedRect(getCenter().x, getCenter().y, 40, 60, 0);
@@ -130,7 +133,7 @@ class Player extends Object {
 
         animation.scale(1.88);
 
-        slash = new AnimatedSprite(direction == LEFT ? texture.tile.width : 0, -10, "res/images/slash.xml");
+        slash = new AnimatedSprite(direction == LEFT ? texture.tile.width : 0, -10, Res.load("images/slash.xml").toText());
         slash.image = Res.images.slash_png.toTile();
         slash.scale(2);
         slash.loop = false;
@@ -140,8 +143,12 @@ class Player extends Object {
 
         animation.filter = new Shader(deadShader);
 
-        startScript();
+       // startScript();
         executeFunc("onNew");
+        if(isCpuMode){
+            animation.adjustColor({hue: Math.degToRad(90)});
+            slash.adjustColor({hue: Math.degToRad(90)});
+        }
     }
 
     function setInputs(user:Int){
@@ -150,6 +157,7 @@ class Player extends Object {
 
     function startScript() {
         //var bossNameFile = bossName.replace(' ', '').toLowerCase();
+        /*
         if(FileSystem.exists("res/characters/"+characterName+"/scripts/moveset.hx")){
             var expr = sys.io.File.getContent("res/characters/"+characterName+"/scripts/moveset.hx");
             parser = new hscript.Parser();
@@ -175,6 +183,7 @@ class Player extends Object {
                 var ast = parser.parseString(expr);
                 interp.execute(ast);
         }
+                */
             
     }
 
@@ -389,10 +398,6 @@ class Player extends Object {
 
     public function fixedUpdate(dt:Float) {
         
-        if(isCpuMode){
-            animation.adjustColor({hue: Math.degToRad(90)});
-            slash.adjustColor({hue: Math.degToRad(90)});
-        }
         if(health <= 0.0){
             health = 0;
             isAlive = false;

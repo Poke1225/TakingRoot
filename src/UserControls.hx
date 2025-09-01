@@ -20,13 +20,13 @@ class UserControls {
 
         // For player 2
         var p2 = new Map<String, Int>();
-        p2.set("Right", Key.M);
-        p2.set("Left", Key.K);
-        p2.set("Up", Key.O);
-        p2.set("Down", Key.L);
+        p2.set("Right", Key.RIGHT);
+        p2.set("Left", Key.LEFT);
+        p2.set("Up", Key.UP);
+        p2.set("Down", Key.DOWN);
         p2.set("Jump", Key.O);
-        p2.set("Attack", Key.U);
-        p2.set("Special", Key.I);
+        p2.set("Attack", Key.O);
+        p2.set("Special", Key.P);
         p2.set("Parry", Key.I);
 
         inputs.push(p1);
