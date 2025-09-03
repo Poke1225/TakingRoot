@@ -128,9 +128,9 @@ class OldTV extends h3d.shader.ScreenShader {
 		@param var texture:Sampler2D;
 
 		@param var scanSpeedAdd = 1.0;
-		@param var lineCut = 0.01;
-		@param var whiteIntensity = 0.45;
-		@param var anaglyphIntensity = 0.5;
+		@param var lineCut = 0.003;
+		@param var whiteIntensity = 0.4;
+		@param var anaglyphIntensity = 0.4;
 
 		// Anaglyph colors.
 		var col_r:Vec3;

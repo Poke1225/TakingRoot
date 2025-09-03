@@ -190,9 +190,9 @@ class Game extends GameScene {
     function updateBots(player:Player, dt:Float){
         for(player2 in playerGrp){
             if(player != player2 && player2.isAlive && battleStarted){
-                if(distanceBetween(player, player2) < Random.float(120, 200)){
+                if(distanceBetween(player, player2) < Random.float(120, 180)){
                     if(!choiceTaken){
-                        choice = Random.int(0, 7);
+                        choice = Random.int(0, 6);
                         switch (choice){
                             case 0 | 1:
                                 if(player.x > player2.x && !player.damaged) player.movePlayer(LEFT, dt*2);
@@ -202,7 +202,7 @@ class Game extends GameScene {
                                 if(player.x < player2.x && !player.damaged) player.movePlayer(RIGHT, dt);
                                 if(player.x > player2.x && !player.damaged) player.movePlayer(LEFT, dt);
                                 timeBeforeNewChoice = Random.float(0.05, 0.4);
-                            case 3 | 4 | 5 | 6 | 7:
+                            case 3 | 4 | 5 | 6:
                                 if(player.canAttack && (player.invTime <= 0.1 || !player.damaged) && !player.isDodging) player.startSlashAnim();
                                 timeBeforeNewChoice = Random.float(0.05, 0.4);
                         }
@@ -229,7 +229,7 @@ class Game extends GameScene {
                 }
 
                 for(bul in player2.bulGrp){
-                    if(distanceBetween(bul, player) < Random.float(90, 110)){
+                    if(distanceBetween(bul, player) < Random.float(30, 100)){
                             var choice2 = Random.int(0, 3);
                             switch (choice2){
                                 case 0:
