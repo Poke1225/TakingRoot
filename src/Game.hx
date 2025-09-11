@@ -107,8 +107,8 @@ class Game extends GameScene {
 
        // gameObj.addBounds(this, Bounds.fromValues(320, 120, 640, 480), 0, 0, 640, 480);
 
-        addCharacter("Piranha", width*0.35, height*0.6, 1, false, RIGHT);
-        addCharacter("Piranha", width*0.65-50, height*0.6, 2, true, LEFT);
+        addCharacter("Piranha", width*0.35, height*0.62, 1, false, RIGHT);
+        addCharacter("Piranha", width*0.65-50, height*0.62, 2, true, LEFT);
         for(char in playerGrp){
             gameObj.addChild(char.bulBatch);
             gameObj.addChild(char.slash);

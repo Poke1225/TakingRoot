@@ -128,8 +128,9 @@ class GameScene extends Scene {
 		//s.draw(ctx, Tile.fromColor(0x00FF0000, 640, 480));
 		//s.autoBounds = false;
 		//s.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
-		object.filter = new Group([new Shader(oldTv), new Shader(chroma), new Shader(deadShader)]);
-		object.filter.useScreenResolution = true;
+		//object.filter = new Group([new Shader(oldTv), new Shader(chroma), new Shader(deadShader)]);
+		//object.filter.useScreenResolution = true;
+		object.filter = new Group([new Shader(deadShader)]);
 		//object.filter.autoBounds = false;
 		//object.filter.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
 		//object.filter.getBounds(object, Bounds.fromValues(320, 120, 640, 480), new Point(1, 1));
